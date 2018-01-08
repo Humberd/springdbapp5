@@ -3,6 +3,7 @@ package humberd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,8 +41,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUser(String username) throws IllegalUsernameException {
-        basicUserRepository.remove(username);
+    public List<User> getAllUsers() {
+        return basicUserRepository.findAllUsers();
+    }
+
+    @Override
+    public User removeUser(String username) {
+        return basicUserRepository.remove(username);
     }
 
     @Override

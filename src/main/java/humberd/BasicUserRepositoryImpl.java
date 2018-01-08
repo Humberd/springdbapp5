@@ -2,8 +2,7 @@ package humberd;
 
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class BasicUserRepositoryImpl implements BasicUserRepository {
@@ -15,12 +14,17 @@ public class BasicUserRepositoryImpl implements BasicUserRepository {
     }
 
     @Override
+    public List<User> findAllUsers() {
+        return new ArrayList<>(repo.values());
+    }
+
+    @Override
     public void save(User user) {
         repo.put(user.getUsername(), user);
     }
 
     @Override
-    public void remove(String username) {
-        repo.remove(username);
+    public User remove(String username) {
+        return repo.remove(username);
     }
 }
