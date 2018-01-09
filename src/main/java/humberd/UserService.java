@@ -8,6 +8,6 @@ public interface UserService {
     void addUser(User user) throws IllegalUsernameException, IncorrectEmailException ;
     User getUser(String username);
     List<User> getAllUsers();
-    User removeUser(String username);
+    Long removeUser(String username);
     boolean verifyUser(String username, String password);
 }

@@ -1,18 +1,20 @@
 package humberd;
 
+import humberd.repositories.UserRepository;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceDBImpl implements UserService{
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     private HashService hashService;
-    private BasicUserRepository basicUserRepository;
+    private UserRepository basicUserRepository;
 
-    public UserServiceImpl(HashService hashService,
-                           BasicUserRepository basicUserRepository) {
+    public UserServiceDBImpl(HashService hashService,
+                           UserRepository basicUserRepository) {
         this.hashService = hashService;
         this.basicUserRepository = basicUserRepository;
     }
@@ -43,16 +45,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        return basicUserRepository.findAllUsers();
+        return basicUserRepository.findAll();
     }
 
     @Override
     public Long removeUser(String username) {
-        User removedUser = basicUserRepository.remove(username);
-        if (removedUser != null) {
-            return removedUser.getId();
-        }
-        return null;
+        return basicUserRepository.deleteByUsername(username);
     }
 
     @Override

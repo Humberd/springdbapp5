@@ -124,12 +124,12 @@ public class Main {
         System.out.println("__Remove User__");
         String username = getFromStdin("Username");
 
-        User removedUser = userService.removeUser(username);
+        Long removedUser = userService.removeUser(username);
         System.out.println();
         if (removedUser == null) {
             System.err.println("--User does not exist--");
         } else {
-            System.out.println("Successfully removed " + removedUser.getUsername() + " from database");
+            System.out.println("Successfully removed " + username + " from database");
         }
     }
 

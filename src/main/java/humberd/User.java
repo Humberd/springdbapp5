@@ -2,20 +2,26 @@ package humberd;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "userx")
 public class User {
     @Id
     @GeneratedValue()
-    private String id;
+    private Long id;
 
     private String username;
 
     private String password;
     private String name;
     private String email;
+
+    public User() {
+
+    }
+
     public User(String username, String password, String name, String email) {
         this.username = username;
         this.password = password;
@@ -23,7 +29,7 @@ public class User {
         this.email = email;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
